@@ -10,10 +10,18 @@ builder = pyspark.sql.SparkSession.builder.appName("SCD2-ETL") \
 
 spark = configure_spark_with_delta_pip(builder).getOrCreate()
 
-customer_delta = spark.read.format("delta") \
+### read data with Change Data Feed
+customer_delta_cdf = spark.read.format("delta") \
     .option("readChangeFeed", "true") \
     .option("startingVersion", 0) \
     .option("endingVersion", 10) \
     .load("./spark-warehouse/customer")
 
-customer_delta.show()
+customer_delta_cdf.show()
+
+### read data by version (time travel)
+customer_delta_version = spark.read.format("delta") \
+    .option("versionAsOf", 1) \
+    .load("./spark-warehouse/customer")
+
+customer_delta_version.show()

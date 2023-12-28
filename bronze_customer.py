@@ -76,20 +76,3 @@ def merge_to_customer_table(spark, schema, path_to_csv):
             "current": "true"
         }
     ).execute()
-
-builder = pyspark.sql.SparkSession.builder.appName("SCD2-ETL") \
-    .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension") \
-    .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog")
-
-spark = configure_spark_with_delta_pip(builder).getOrCreate()
-
-# merge_to_customer_table(spark, customer_schema, "./data/customer.csv")
-merge_to_customer_table(spark, customer_new_schema, "./data/customer_new.csv")
-
-customer_delta = spark.read.format("delta") \
-    .option("readChangeFeed", "true") \
-    .option("startingVersion", 0) \
-    .option("endingVersion", 10) \
-    .load("./spark-warehouse/customer")
-
-customer_delta.show()

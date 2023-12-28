@@ -3,6 +3,12 @@ from delta import *
 from delta.tables import DeltaTable
 from pyspark.sql.types import *
 
+# import bronze level functions
+from bronze_agent import *
+from bronze_customer import *
+from bronze_policy import *
+from bronze_claim import *
+
 builder = pyspark.sql.SparkSession.builder.appName("SCD2-ETL") \
     .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension") \
     .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog")

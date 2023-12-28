@@ -77,20 +77,3 @@ def merge_to_policy_table(spark, schema, path_to_csv):
             "latest": "true"
         }
     ).execute()
-
-builder = pyspark.sql.SparkSession.builder.appName("SCD2-ETL") \
-    .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension") \
-    .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog")
-
-spark = configure_spark_with_delta_pip(builder).getOrCreate()
-
-# merge_to_policy_table(spark, policy_schema, "./data/policy.csv")
-merge_to_policy_table(spark, policy_new_schema, "./data/policy_new.csv")
-
-policy_delta = spark.read.format("delta") \
-    .option("readChangeFeed", "true") \
-    .option("startingVersion", 0) \
-    .option("endingVersion", 10) \
-    .load("./spark-warehouse/policy")
-
-policy_delta.show()

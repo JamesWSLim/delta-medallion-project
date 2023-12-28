@@ -12,28 +12,14 @@ builder = pyspark.sql.SparkSession.builder.appName("SCD2-ETL") \
 
 spark = configure_spark_with_delta_pip(builder).getOrCreate()
 
-add_or_merge_policy_data(spark)
-merge_to_claim_table(spark)
-add_or_merge_agent_data(spark)
-add_or_merge_customer_data(spark)
+### initialize data into tables
+merge_to_policy_table(spark, policy_schema, "./data/policy.csv")
+merge_to_claim_table(spark, "./data/claim.csv")
+merge_to_agent_table(spark, agent_schema, "./data/agent.csv")
+merge_to_customer_table(spark, customer_schema, "./data/customer.csv")
 
-agent_delta = spark \
-        .read.format("delta") \
-        .load("./spark-warehouse/agent")
-agent_delta.show()
-print(DeltaTable.isDeltaTable(spark, "./spark-warehouse/agent"))
-customer_delta = spark \
-        .read.format("delta") \
-        .load("./spark-warehouse/customer")
-customer_delta.show()
-print(DeltaTable.isDeltaTable(spark, "./spark-warehouse/customer"))
-policy_delta = spark \
-        .read.format("delta") \
-        .load("./spark-warehouse/policy")
-policy_delta.show()
-print(DeltaTable.isDeltaTable(spark, "./spark-warehouse/policy"))
-claim_delta = spark \
-        .read.format("delta") \
-        .load("./spark-warehouse/claim")
-claim_delta.show()
-print(DeltaTable.isDeltaTable(spark, "./spark-warehouse/claim"))
+### merge new data into tables
+merge_to_policy_table(spark, policy_new_schema, "./data/policy_new.csv")
+merge_to_claim_table(spark, "./data/claim_new.csv")
+merge_to_agent_table(spark, agent_new_schema, "./data/agent_new.csv")
+merge_to_customer_table(spark, customer_new_schema, "./data/customer_new.csv")
