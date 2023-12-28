@@ -1,0 +1,4 @@
+ClaimID,PolicyID,ClaimAmount,ClaimDate,Description
+1,1,1000,2023-07-15,Car accident,rear-ended
+2,2,853.43,2023-08-20,Theft of personal items
+3,3,418,2023-09-25,Collision with another car

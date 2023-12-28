@@ -1,0 +1,3 @@
+CustomerID,FirstName,LastName,DateOfBirth,Address,City,Region,LastUpdated
+1,John,Doe,1980-05-15,987 King St,Miami,East,2023-12-25
+4,Mike,Oxlong,1998-05-14,123 Bro St,San Diego,West,2023-12-25

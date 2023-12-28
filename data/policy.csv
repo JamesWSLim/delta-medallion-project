@@ -1,0 +1,5 @@
+PolicyID,CustomerID,AgentID,CoverageType,Premium,StartDate,EndDate,Latest
+1,1,1,Comprehensive,800,2023-01-01,2024-01-01,True
+2,2,2,Liability,600,2023-02-01,2024-02-01,True
+3,3,1,Collision,700,2023-03-01,2024-03-01,True
+4,4,2,Comprehensive,1550,2022-12-01,2023-12-01,True

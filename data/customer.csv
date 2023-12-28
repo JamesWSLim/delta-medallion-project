@@ -1,0 +1,5 @@
+CustomerID,FirstName,LastName,DateOfBirth,Address,City,Region,LastUpdated,Current
+1,John,Doe,1980-05-15,123 Main St,Charlotte,East,2023-01-01,True
+2,Jane,Smith,1992-10-22,456 Oak St,New York,East,2023-02-01,True
+3,Mick,Johnson,1985-03-08,789 Pine St,Chicago,East,2023-03-01,True
+4,Mike,Oxlong,1998-05-14,231 Anne St,San Francisco,West,2022-12-01,True
