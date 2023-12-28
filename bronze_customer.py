@@ -1,5 +1,4 @@
 from delta import *
-import pyspark
 from delta.tables import DeltaTable
 from pyspark.sql.types import *
 

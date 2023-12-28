@@ -1,7 +1,5 @@
 import pyspark
-import os
 from delta import *
-from delta.tables import DeltaTable
 from pyspark.sql.types import *
 
 builder = pyspark.sql.SparkSession.builder.appName("SCD2-ETL") \

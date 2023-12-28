@@ -1,7 +1,6 @@
 from delta import *
 from delta.tables import DeltaTable
 from pyspark.sql.types import *
-import pyspark
 
 agent_schema = StructType([
     StructField("AgentID", IntegerType(), nullable=False),
