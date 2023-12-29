@@ -23,9 +23,3 @@ spark = configure_spark_with_delta_pip(builder).getOrCreate()
 #     .load("./spark-warehouse/bronze_customer")
 
 # bronze_customer_version.show()
-
-### read data by version (time travel)
-silver_customer_version = spark.read.format("delta") \
-    .load("./spark-warehouse/silver_customer")
-
-silver_customer_version.show()
