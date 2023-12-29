@@ -16,8 +16,8 @@ spark = configure_spark_with_delta_pip(builder).getOrCreate()
 
 ### create table for policies with CDF
 spark.sql(
-    "CREATE TABLE policy \
-        (policyid INTEGER, \
+    "CREATE TABLE default.bronze_policy ( \
+        policyid INTEGER, \
         customerid INTEGER, \
         agentid INTEGER, \
         coveragetype STRING, \
@@ -25,11 +25,12 @@ spark.sql(
         startdate DATE, \
         enddate DATE, \
         latest STRING \
-        ) USING delta TBLPROPERTIES (delta.enableChangeDataFeed = true)"
+        ) USING delta \
+        TBLPROPERTIES (delta.enableChangeDataFeed = true)"
 )
 ### create table for agents with CDF
 spark.sql(
-    "CREATE TABLE agent \
+    "CREATE TABLE default.bronze_agent \
         (agentid INTEGER, \
         firstname STRING, \
         lastname STRING, \
@@ -37,11 +38,12 @@ spark.sql(
         phonenumber STRING, \
         lastupdated DATE, \
         current STRING \
-        ) USING delta TBLPROPERTIES (delta.enableChangeDataFeed = true)"
+        ) USING delta \
+        TBLPROPERTIES (delta.enableChangeDataFeed = true)"
 )
 ### create table for customers with CDF
 spark.sql(
-    "CREATE TABLE customer \
+    "CREATE TABLE default.bronze_customer \
         (customerid INTEGER, \
         firstname STRING, \
         lastname STRING, \
@@ -51,15 +53,17 @@ spark.sql(
         region STRING, \
         lastupdated DATE, \
         current STRING \
-        ) USING delta TBLPROPERTIES (delta.enableChangeDataFeed = true)"
+        ) USING delta \
+        TBLPROPERTIES (delta.enableChangeDataFeed = true)"
 )
 ### create table for claims with CDF
 spark.sql(
-    "CREATE TABLE claim \
+    "CREATE TABLE default.bronze_claim \
         (claimid INTEGER, \
         policyid INTEGER, \
         claimamount DOUBLE, \
         claimdate DATE, \
         description STRING \
-        ) USING delta TBLPROPERTIES (delta.enableChangeDataFeed = true)"
+        ) USING delta \
+        TBLPROPERTIES (delta.enableChangeDataFeed = true)"
 )

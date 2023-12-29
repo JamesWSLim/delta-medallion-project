@@ -26,7 +26,7 @@ customer_new_schema = StructType([
 
 def merge_to_customer_table(spark, schema, path_to_csv):
 
-    customerTable = DeltaTable.forPath(spark, "./spark-warehouse/customer")
+    customerTable = DeltaTable.forPath(spark, "./spark-warehouse/bronze_customer")
     updates = spark.read.csv(path_to_csv, header=True, schema=schema, sep=",")
 
     # Rows to INSERT new information of existing customers

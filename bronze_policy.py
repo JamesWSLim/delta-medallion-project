@@ -24,7 +24,7 @@ policy_new_schema = StructType([
 
 def merge_to_policy_table(spark, schema, path_to_csv):
 
-    policyTable = DeltaTable.forPath(spark, "./spark-warehouse/policy")
+    policyTable = DeltaTable.forPath(spark, "./spark-warehouse/bronze_policy")
     updates = spark.read.csv(path_to_csv, header=True, schema=schema, sep=",")
 
     # Rows to INSERT new information of existing policies
@@ -54,7 +54,7 @@ def merge_to_policy_table(spark, schema, path_to_csv):
         stagedUpdates.alias("staged_updates"),
         "policies.PolicyID = mergeKey") \
     .whenMatchedUpdate(
-        condition = "policies.latest = true OR \
+        condition = "policies.latest = true AND \
                     policies.customerid <> staged_updates.customerid OR \
                     policies.agentid <> staged_updates.agentid OR \
                     policies.coveragetype <> staged_updates.coveragetype OR \

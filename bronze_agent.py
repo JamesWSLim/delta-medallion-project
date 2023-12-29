@@ -22,7 +22,7 @@ agent_new_schema = StructType([
 
 def merge_to_agent_table(spark, schema, path_to_csv):
 
-    agentTable = DeltaTable.forPath(spark, "./spark-warehouse/agent")
+    agentTable = DeltaTable.forPath(spark, "./spark-warehouse/bronze_agent")
     updates = spark.read.csv(path_to_csv, header=True, schema=schema, sep=",")
 
     # Rows to INSERT new information of existing agents

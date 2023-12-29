@@ -12,7 +12,7 @@ claim_schema = StructType([
 
 def merge_to_claim_table(spark, path_to_csv):
 
-    claimTable = DeltaTable.forPath(spark, "./spark-warehouse/claim")
+    claimTable = DeltaTable.forPath(spark, "./spark-warehouse/bronze_claim")
     updates = spark.read.csv(path_to_csv, header=True, schema=claim_schema, sep=",")
     
     claimTable.alias("claims").merge(
