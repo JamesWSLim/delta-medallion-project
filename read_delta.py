@@ -23,3 +23,8 @@ spark = configure_spark_with_delta_pip(builder).getOrCreate()
 #     .load("./spark-warehouse/bronze_customer")
 
 # bronze_customer_version.show()
+
+gold_policy = spark.read.format("delta") \
+    .load("./spark-warehouse/gold_policy")
+
+gold_policy.show()
