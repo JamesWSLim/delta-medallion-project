@@ -16,7 +16,7 @@ def deduplicate_and_overwrite_silver_agent(spark):
     else:
         silver_agent.createOrReplaceTempView("silver_agent")
         spark.sql(
-            "CREATE TABLE silver_agent \
-            USING delta \
-            AS SELECT * FROM silver_agent;"
+            """CREATE TABLE IF NOT EXISTS silver_agent 
+            USING delta 
+            AS SELECT * FROM silver_agent;"""
         )

@@ -25,17 +25,17 @@ bronze_agent.createOrReplaceTempView("agent_to_join")
 
 ### SQL join tables
 gold_policy = spark.sql(
-    "SELECT t1.policyid,t1.coveragetype,t1.premium,t1.startdate,t1.enddate,\
-    t2.customerid,t2.firstname as customerfirstname,t2.lastname as customerlastname,t2.dateofbirth as customerdateofbirth,\
-    t2.address as customeraddress,t2.city as customercity,t2.region as customerregion,t2.lastupdated as customerlastupdated, \
-    t3.agentid,t3.firstname as agentfirstname,t3.lastname as agentlastname,t3.region as agentregion, \
-    t3.phonenumber as agentphonenumber,t3.lastupdated as agentlastupdated \
-    FROM policy_to_join t1 \
-    LEFT JOIN customer_to_join t2 on t1.customerid=t2.customerid \
-    LEFT JOIN agent_to_join t3 on t1.agentid=t3.agentid \
-    WHERE t2.current=true \
-    AND t3.current=true \
-    "
+    """SELECT t1.policyid,t1.coveragetype,t1.premium,t1.startdate,t1.enddate,
+    t2.customerid,t2.firstname as customerfirstname,t2.lastname as customerlastname,t2.dateofbirth as customerdateofbirth,
+    t2.address as customeraddress,t2.city as customercity,t2.region as customerregion,t2.lastupdated as customerlastupdated, 
+    t3.agentid,t3.firstname as agentfirstname,t3.lastname as agentlastname,t3.region as agentregion, 
+    t3.phonenumber as agentphonenumber,t3.lastupdated as agentlastupdated 
+    FROM policy_to_join t1 
+    LEFT JOIN customer_to_join t2 on t1.customerid=t2.customerid 
+    LEFT JOIN agent_to_join t3 on t1.agentid=t3.agentid 
+    WHERE t2.current=true 
+    AND t3.current=true
+    """
 )
 gold_policy.show()
 

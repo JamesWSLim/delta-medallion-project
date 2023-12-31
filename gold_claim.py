@@ -17,16 +17,18 @@ bronze_claim = spark.read.format("delta") \
 bronze_claim.createOrReplaceTempView("claim_to_join")
 
 gold_claim = spark.sql(
-    "SELECT t1.claimid,t1.claimamount,t1.claimdate, \
-        t2.policyid,t2.coveragetype,t2.premium,t2.startdate,t2.enddate,\
-        t2.customerid,t2.customerfirstname,t2.customerlastname,t2.customerdateofbirth,\
-        t2.customeraddress,t2.customercity,t2.customerregion,t2.customerlastupdated, \
-        t2.agentid,t2.agentfirstname,t2.agentlastname,t2.agentregion, \
-        t2.agentphonenumber,t2.agentlastupdated \
-    FROM claim_to_join t1 \
-    LEFT JOIN policy_to_join t2 on t1.policyid=t2.policyid \
-    WHERE t1.claimdate <= t2.enddate \
-    AND t1.claimdate >= t2.startdate"
+    """
+    SELECT t1.claimid,t1.claimamount,t1.claimdate,
+        t2.policyid,t2.coveragetype,t2.premium,t2.startdate,t2.enddate
+        t2.customerid,t2.customerfirstname,t2.customerlastname,t2.customerdateofbirth
+        t2.customeraddress,t2.customercity,t2.customerregion,t2.customerlastupdated,
+        t2.agentid,t2.agentfirstname,t2.agentlastname,t2.agentregion,
+        t2.agentphonenumber,t2.agentlastupdated
+    FROM claim_to_join t1
+    LEFT JOIN policy_to_join t2 on t1.policyid=t2.policyid
+    WHERE t1.claimdate <= t2.enddate
+    AND t1.claimdate >= t2.startdate
+    """
 )
 gold_claim.show()
 

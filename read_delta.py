@@ -9,13 +9,13 @@ builder = pyspark.sql.SparkSession.builder.appName("SCD2-ETL") \
 spark = configure_spark_with_delta_pip(builder).getOrCreate()
 
 # ### read data with Change Data Feed
-# bronze_customer_cdf = spark.read.format("delta") \
-#     .option("readChangeFeed", "true") \
-#     .option("startingVersion", 0) \
-#     .option("endingVersion", 10) \
-#     .load("./spark-warehouse/bronze_customer")
+bronze_customer_cdf = spark.read.format("delta") \
+    .option("readChangeFeed", "true") \
+    .option("startingVersion", 0) \
+    .option("endingVersion", 10) \
+    .load("./spark-warehouse/bronze_customer")
 
-# bronze_customer_cdf.show()
+bronze_customer_cdf.show()
 
 # ### read data by version (time travel)
 # bronze_customer_version = spark.read.format("delta") \
@@ -24,7 +24,5 @@ spark = configure_spark_with_delta_pip(builder).getOrCreate()
 
 # bronze_customer_version.show()
 
-gold_policy = spark.read.format("delta") \
-    .load("./spark-warehouse/gold_policy")
-
-gold_policy.show()
+# silver_agent = spark.read.format("delta") \
+#         .load("./spark-warehouse/bronze_agent")
