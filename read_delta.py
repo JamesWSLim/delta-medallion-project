@@ -17,12 +17,9 @@ bronze_customer_cdf = spark.read.format("delta") \
 
 bronze_customer_cdf.show()
 
-# ### read data by version (time travel)
-# bronze_customer_version = spark.read.format("delta") \
-#     .option("versionAsOf", 1) \
-#     .load("./spark-warehouse/bronze_customer")
+### read data by version (time travel)
+bronze_customer_version = spark.read.format("delta") \
+    .option("versionAsOf", 1) \
+    .load("./spark-warehouse/bronze_customer")
 
-# bronze_customer_version.show()
-
-# silver_agent = spark.read.format("delta") \
-#         .load("./spark-warehouse/bronze_agent")
+bronze_customer_version.show()
