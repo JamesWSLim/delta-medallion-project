@@ -1,7 +1,7 @@
 <h1 align="center">Delta Medallion Project</h1>
 
 ## Description
-Delta Medallion Project is a ETL pipeline processing Slowly Changing Dimension Type 2 (SCD 2) dataset using Delta Lake, an open-source framework and Apache Spark written in Python. Goal of this project is to provide a reliable and scalable data lake solution, efficiently handling SCD 2 data type. \
+Delta Medallion Project is an ETL pipeline processing Slowly Changing Dimension Type 2 (SCD 2) dataset using Delta Lake, an open-source framework and Apache Spark written in Python. Goal of this project is to provide a reliable and scalable data lake solution, efficiently handling SCD 2 data type. \
 \
 Here are some key features from Delta Lake, Apache Spark, and Medallion Architecture implemented in this ETL project: 
 1. ACID Transactions: Protect data with serializability and isolation
